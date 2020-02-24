@@ -10,6 +10,7 @@ fullStackPHPClassSession("echo", __LINE__);
 echo "<p>Olá Mundo!", " ", "<span class='tag'>#BoraProgramar!</span>", "</p>";
 $hello = "Olá mundo!"; //string;
 $code = "<span class='tag'>#BoraProgramar!</span>";
+$name = "<span class='tag'>#WebDeveloper!</span>";
 
 echo "<p>$hello</p>";
 echo '<p>$hello</p>';
