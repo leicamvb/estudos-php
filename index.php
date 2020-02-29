@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../fullstackphp/fsphp.php';
+require __DIR__ . '/fullstackphp/fsphp.php';
 echo fullStackPHPClassName("02.05 - Operadores na prática");
 
 /**
