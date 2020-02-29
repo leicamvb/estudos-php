@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/fullstackphp/fsphp.php';
 echo fullStackPHPClassName("02.05 - Operadores na prática");
-
+echo "<pre>";
 /**
  * [ operadores ] https://php.net/manual/pt_BR/language.operators.php
  * [ atribuição ] https://php.net/manual/pt_BR/language.operators.assignment.php
@@ -86,3 +86,5 @@ $calc = [
     "a % b" => ($calcA % $calcB),
 ];
 var_dump($calc);
+
+echo "</pre>";
