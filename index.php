@@ -9,12 +9,50 @@ fullStackPHPClassName("02.06 - Arrays, vetores e pilhas");
 fullStackPHPClassSession("while, do while", __LINE__);
 
 echo '<pre>';
+
+
+$arrayCursosIndex = [
+    "NET",
+    "PHP",
+    "Java",
+    "Ruby",
+    "Python",
+];
+var_dump($arrayCursosIndex);
+
+$net = [
+    'microsoft' => 'C# com Ecommerce',
+    'azure' => 'deploy automatizado',
+    'devops' => 'testes unitários'
+];
+
+$php = [
+    'bonieky' => 'php do zero ao profissional',
+    'upinside' => 'laravel 5.8',
+    'schoolofnet' => 'vuejs com laravel',
+    
+];
+
+$cursos = [
+    "course_net" => $net,
+    "course_php" => $php,   
+];
+
+echo "<p>Lista de Cursos</p>";
+var_dump($cursos);
+echo '<br>';
+echo "<p>Array course_net</p>";
+var_dump($cursos['course_net']['microsoft']);
+
+//  echo "<p>{$arrayPessoa['lastName']}</p>";
+
+echo "<p>Loopin com WHILE</p>";
 $looping = 1;
 $while = [];
 
 while ($looping <= 5) {
     $while[] = $looping;
-    $looping++;
+    $looping++; //looping = looping + 1
 }
 var_dump($while);
 
@@ -24,7 +62,7 @@ $while = [];
 
 do {
     $while[] = $looping;
-    $looping--;
+    $looping--; //looping = looping - 1
 } while ($looping >= 1);
 var_dump($while);
 
@@ -33,12 +71,11 @@ var_dump($while);
  */
 fullStackPHPClassSession("for", __LINE__);
 
+echo "<p> total de index" . count($arrayCursosIndex) . "</p>";
 
-for ($i = 1; $i <= 10; $i++) {
-    echo "<p>{$i}</p>";
+for ($i = 0; $i < count($arrayCursosIndex); $i++) {
+    echo "<p>{$arrayCursosIndex[$i]}</p>";
 }
-
-
 
 $arrayPessoa = [
     "name" => "Web Developer",
@@ -64,12 +101,13 @@ var_dump($arrayPessoa);
 fullStackPHPClassSession("break, continue", __LINE__);
 
 
-for ($c = 1; $c <= 10; $c++) {
+for ($c = 1; $c <= 20; $c++) {
+
     if ($c % 2 == 1) {
         continue;
     }
 
-    if ($c >= 10) {
+    if ($c >= 20) {
         break;
     }
 
@@ -91,10 +129,13 @@ for ($ar = 0; $ar <= 2; $ar++) {
 var_dump($array);
 
 foreach ($array as $item) {
-    var_dump($item);
+    echo "<p>Valor impresso {$item}</p>";
 }
 
-foreach ($array as $key => $value) {
-    var_dump("{$key} = {$value}");
+fullStackPHPClassSession("Foreach com key  value", __LINE__);
+
+
+foreach ($arrayPessoa as $chaveDoArray => $valorDaChave) {
+    echo "<p>A chave é {$chaveDoArray} Valor impresso {$valorDaChave}</p>";
 }
 echo '</pre>';
