@@ -8,6 +8,7 @@ fullStackPHPClassName("02.08 - Estruturas de repetição");
  */
 fullStackPHPClassSession("while, do while", __LINE__);
 
+echo '<pre>';
 $looping = 1;
 $while = [];
 
@@ -96,3 +97,4 @@ foreach ($array as $item) {
 foreach ($array as $key => $value) {
     var_dump("{$key} = {$value}");
 }
+echo '</pre>';
