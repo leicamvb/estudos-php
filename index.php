@@ -10,6 +10,7 @@ fullStackPHPClassSession("index array", __LINE__);
 $arrA = array(1, 2, 3);
 $arrA = [0, 1, 2, 3];
 
+echo '<pre>';
 var_dump($arrA);
 
 
@@ -18,6 +19,8 @@ $arrayIndex = [
     "Angus",
     "Malcolm"
 ];
+echo "Imprimiu o valor : $arrayIndex[2] <br>";
+
 $arrayIndex[] = "Cliff";
 $arrayIndex[] = "Phil";
 
@@ -38,6 +41,24 @@ $arrayAssoc["drums"] = "Phil";
 $arrayAssoc["rock_band"] = "AC/DC";
 
 var_dump($arrayAssoc);
+
+
+$arrayPessoa = [
+    "name" => "Web Developer",
+    "address" => "Rua Endereço",
+    "number" => "0001",
+    "cep" => "00000-01",
+    "age" => 16,
+];
+
+
+
+$arrayPessoa['name'] = "Phil";
+$arrayPessoa["address"] = "AC/DC";
+$arrayPessoa[] = "+55";
+
+var_dump($arrayPessoa);
+
 
 /**
  * [ multidimensional array ] "key" => ["key" => "value"]
@@ -69,9 +90,12 @@ $acdc = [
     "base_guitar" => "Malcolm",
     "bass_guitar" => "Cliff",
     "drums" => "Phil",
+    "keyboard" => "Jhon"
 ];
 
-echo "<p>O vocal da banda AC/DC é {$acdc["vocal"]}, e junto com {$acdc['solo_guitar']} fazem um ótimo show de rock!</p>";
+echo "<p>O vocal da banda <br>AC/DC é 
+{$acdc["vocal"]}, e junto com {$acdc['solo_guitar']}
+ fazem um ótimo show de rock!</p>";
 
 $pearl = [
     "band" => "Pearl Jam",
@@ -89,18 +113,27 @@ $rockBands = [
 
 var_dump($rockBands);
 
-echo "<p>{$rockBands['pearl_jam']['vocal']}</p>";
+echo "<p>{$rockBands['pearl_jam']['keyboard']}</p>";
+
+
+fullStackPHPClassSession("array access acdc", __LINE__);
 
 foreach ($acdc as $item) {
     echo "<p>{$item}</p>";
 }
 
-foreach ($acdc as $key => $value) {
-    echo "<p>{$value} is a {$key} of band!</p>";
+foreach ($arrayPessoa as $key => $value) {
+
+    if ($key === "age") {
+       echo "<p>{$key} is {$value}</p>";
+    }
 }
+
 
 
 foreach ($rockBands as $rockBand) {
-    $art = "<article><h1>%s</h1><p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p></article>";
+    $art = "<article><h1>%s</h1><p>%s</p><p>%s</p><p>%s
+    </p><p>%s</p><p>%s</p></article>";
     vprintf($art, $rockBand);
 }
+echo '</pre>';
