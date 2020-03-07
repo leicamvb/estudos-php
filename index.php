@@ -1,90 +1,106 @@
 <?php
 require __DIR__ . '/fullstackphp/fsphp.php';
-echo fullStackPHPClassName("02.05 - Operadores na prática");
-echo "<pre>";
-/**
- * [ operadores ] https://php.net/manual/pt_BR/language.operators.php
- * [ atribuição ] https://php.net/manual/pt_BR/language.operators.assignment.php
- */
-fullStackPHPClassSession("atribuição", __LINE__);
-
-$operatorA = 5;
-$operators = [
-    "a += 5" => ($operatorA += 5),
-    "a -= 5" => ($operatorA -= 5),
-    "a *- 5" => ($operatorA *= 5),
-    "a /= 5" => ($operatorA /= 5)
-];
-var_dump($operators);
-
-
-$incrementA = 5;
-$incrementB = 5;
-$increment = [
-    "pós-incremento" => $incrementA++,
-    "res-incremento" => $incrementA,
-    "pré-incremento" => ++$incrementA,
-    "pós-decremento" => $incrementB--,
-    "res-decremento" => $incrementB,
-    "pré-decremento" => --$incrementB,
-];
-var_dump($increment);
-
+fullStackPHPClassName("02.06 - Arrays, vetores e pilhas");
 
 /**
- * [ comparação ] https://php.net/manual/pt_BR/language.operators.comparison.php
+ * [ arrays ] https://php.net/manual/pt_BR/language.types.array.php
  */
-fullStackPHPClassSession("comparação", __LINE__);
+fullStackPHPClassSession("index array", __LINE__);
 
-$relatedA = 5;
-$relatedB = "5";
-$relatedC = 10;
-$related = [
-    "a == b" => ($relatedA == $relatedB),
-    "a === b" => ($relatedA === $relatedB),
-    "a != b" => ($relatedA != $relatedB),
-    "a !== b" => ($relatedA !== $relatedB),
-    "a > c" => ($relatedA > $relatedC),
-    "a < c" => ($relatedA < $relatedC),
-    "a >= b" => ($relatedA >= $relatedB),
-    "a >= c" => ($relatedA >= $relatedC),
-    "a <= c" => ($relatedA <= $relatedC),
+$arrA = array(1, 2, 3);
+$arrA = [0, 1, 2, 3];
+
+var_dump($arrA);
+
+
+$arrayIndex = [
+    "Brian",
+    "Angus",
+    "Malcolm"
 ];
-var_dump($related);
+$arrayIndex[] = "Cliff";
+$arrayIndex[] = "Phil";
 
+var_dump($arrayIndex);
 
 /**
- * [ lógicos ] https://php.net/manual/pt_BR/language.operators.logical.php
+ * [ associative array ] "key" => "value"
  */
-fullStackPHPClassSession("lógicos", __LINE__);
+fullStackPHPClassSession("associative array", __LINE__);
 
-$logicA = true;
-$logicB = false;
-$logic = [
-    "a && b" => ($logicA && $logicB),
-    "a || b" => ($logicA || $logicB),
-    "a" => ($logicA),
-    "! a" => (!$logicA),
-    "! b" => (!$logicB),
+$arrayAssoc = [
+    "vocal" => "Brian",
+    "solo_guitar" => "Angus",
+    "base_guitar" => "Malcolm",
+    "bass_guitar" => "Cliff"
 ];
-var_dump($logic);
+$arrayAssoc["drums"] = "Phil";
+$arrayAssoc["rock_band"] = "AC/DC";
 
+var_dump($arrayAssoc);
 
 /**
- * [ aritiméticos ] https://php.net/manual/pt_BR/language.operators.arithmetic.php
+ * [ multidimensional array ] "key" => ["key" => "value"]
  */
-fullStackPHPClassSession("aritiméticos", __LINE__);
+fullStackPHPClassSession("multidimensional array", __LINE__);
 
-
-$calcA = 5;
-$calcB = 10;
-$calc = [
-    "a + b" => ($calcA + $calcB),
-    "a - b" => ($calcA - $calcB),
-    "a * b" => ($calcA * $calcB),
-    "a / b" => ($calcA / $calcB),
-    "a % b" => ($calcA % $calcB),
+$brian = ["Brian", "Mic"];
+$angus = ["name" => "Angus", "intrument" => "Guitar"];
+$instruments = [
+    $brian,
+    $angus
 ];
-var_dump($calc);
+var_dump($instruments);
 
-echo "</pre>";
+var_dump([
+    "brian" => $brian,
+    "angus" => $angus
+]);
+
+/**
+ * [ array access ] foreach(array as item) || foreach(array as key => value)
+ */
+fullStackPHPClassSession("array access", __LINE__);
+
+$acdc = [
+    "band" => "AC/DC",
+    "vocal" => "Brian",
+    "solo_guitar" => "Angus",
+    "base_guitar" => "Malcolm",
+    "bass_guitar" => "Cliff",
+    "drums" => "Phil",
+];
+
+echo "<p>O vocal da banda AC/DC é {$acdc["vocal"]}, e junto com {$acdc['solo_guitar']} fazem um ótimo show de rock!</p>";
+
+$pearl = [
+    "band" => "Pearl Jam",
+    "vocal" => "Eddie",
+    "solo_guitar" => "Mike",
+    "base_guitar" => "Stone",
+    "bass_guitar" => "Jeff",
+    "drums" => "Jack",
+];
+
+$rockBands = [
+    "acdc" => $acdc,
+    "pearl_jam" => $pearl
+];
+
+var_dump($rockBands);
+
+echo "<p>{$rockBands['pearl_jam']['vocal']}</p>";
+
+foreach ($acdc as $item) {
+    echo "<p>{$item}</p>";
+}
+
+foreach ($acdc as $key => $value) {
+    echo "<p>{$value} is a {$key} of band!</p>";
+}
+
+
+foreach ($rockBands as $rockBand) {
+    $art = "<article><h1>%s</h1><p>%s</p><p>%s</p><p>%s</p><p>%s</p><p>%s</p></article>";
+    vprintf($art, $rockBand);
+}
