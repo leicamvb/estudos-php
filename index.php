@@ -6,13 +6,22 @@ fullStackPHPClassName("02.09 - Closures e generators");
  * [ closures ] https://php.net/manual/pt_BR/functions.anonymous.php
  */
 fullStackPHPClassSession("closures", __LINE__);
-
+echo '<pre>';
 $myAge = function ($year) {
-    $age = date("Y") - $year;
+    $age = date('Y') - $year; 
     return "<h5>Você tem {$age} anos!</h5>";
 };
 
-echo $myAge(1986);
+echo $myAge(1990);
+
+
+$getUserCurrent = function () {
+    $user = 'Web Developer'; 
+    return "<h5>Usuário Logado atual é {$user}!</h5>";
+};
+
+echo $getUserCurrent();
+
 
 $priceBrl = function ($price) {
     return number_format($price, 2, ",", ".");
@@ -67,3 +76,4 @@ foreach (generatorDate($iterator) as $date) {
     echo "<small class='tag' style='background-color: var(--green)'>{$date}</small>" . PHP_EOL;
 }
 echo "</div>";
+echo '</pre>';
