@@ -27,7 +27,7 @@ $priceBrl = function ($price) {
     return number_format($price, 2, ",", ".");
 };
 
-echo "<p>O projeto custa R$ {$priceBrl(3600)}. Vamos fechar?";
+echo "<p>O projeto custa R$ {$priceBrl(3600)}. Vamos fechar?</p>";
 
 $myCart = [];
 $myCart["totalPrice"] = 0;
