@@ -12,10 +12,11 @@ $form = new StdClass();
 $form->name = "Um nome";
 $form->mail = "um@email.com";
 
-var_dump($_REQUEST);
+var_dump($_REQUEST); 
 
 $form->method = "get";
 $form->method = "post";
+
 include __DIR__ . "/form.php";
 
 
@@ -26,6 +27,7 @@ fullStackPHPClassSession("post", __LINE__);
 
 
 var_dump($_POST);
+
 
 $post = filter_input(INPUT_POST, "name", FILTER_DEFAULT);
 $postArray = filter_input_array(INPUT_POST, FILTER_DEFAULT);
