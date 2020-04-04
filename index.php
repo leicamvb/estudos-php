@@ -7,7 +7,7 @@ fullStackPHPClassName("03.09 - Formulários e filtros");
  * https://php.net/manual/pt_BR/book.filter.php
  */
 fullStackPHPClassSession("request", __LINE__);
-
+echo '<pre>';
 $form = new StdClass();
 $form->name = "Um nome";
 $form->mail = "um@email.com";
@@ -102,3 +102,5 @@ var_dump(
     ],
     filter_var_array($getForm, $filterForm)
 );
+
+echo '</pre>';
