@@ -1,50 +1,64 @@
 <?php
 require __DIR__ . '/fullstackphp/fsphp.php';
-fullStackPHPClassName("02.11 - Trabalhando com funções");
+fullStackPHPClassName("03.08 - Gestão de diretórios");
 
 /*
- * [ functions ] https://php.net/manual/pt_BR/language.functions.php
+ * [ verificar, criar e abrir ] file_exists | is_dir | mkdir  | scandir
  */
-fullStackPHPClassSession("functions", __LINE__);
+fullStackPHPClassSession("verificar, criar e abrir", __LINE__);
 
-require __DIR__ . "/functions.php";
-echo "<pre>";
-var_dump(functionName("Pearl Jam", "AC\DC", "Alter Bridge"));
-var_dump(functionName("Robson", "Kaue", "Gustavo"));
-
-
-var_dump(optionArgs("Robson"));
-var_dump(optionArgs("Robson", "Kaue"));
-var_dump(optionArgs("Robson", "Kaue", "Gustavo"));
-echo "</pre>";
-
-/*
- * [ global access ] global $var
- */
-fullStackPHPClassSession("global access", __LINE__);
-
-$weight = 86;
-$height = 1.83;
-echo calcImc();
+$folder = __DIR__ . "/uploads";
+if (!file_exists($folder) || !is_dir($folder)) {
+    mkdir($folder, 0755);
+} else {
+    var_dump(scandir($folder));
+}
 
 
 /*
- * [ static arguments ] static $var
+ * [ copiar e renomear ] copy | rename
  */
-fullStackPHPClassSession("static arguments", __LINE__);
+fullStackPHPClassSession("copiar e renomear", __LINE__);
 
-$pay = payTotal(200);
-$pay = payTotal(150);
-$pay = payTotal(500);
 
-echo $pay;
+$file = __DIR__ . "/file.txt";
+var_dump(
+    pathinfo($file),
+    scandir($folder),
+    scandir(__DIR__)
+);
+
+if (!file_exists($file) || !is_file($file)) {
+    fopen($file, "w");
+} else {
+    //var_dump(filemtime($file), filemtime(__DIR__ . "/uploads/file.txt"));
+
+    //copy($file, $folder . "/" . basename($file));
+    //rename(__DIR__ . "/uploads/file.txt", __DIR__ . "/uploads/" . time() . "." . pathinfo($file)["extension"]);
+    rename($file, __DIR__ . "/uploads/" . time() . "." . pathinfo($file)["extension"]);
+}
 
 
 /*
- * [ dinamic arguments ] get_args | num_args
+ * [ remover e deletar ] unlink | rmdir
  */
-fullStackPHPClassSession("dinamic arguments", __LINE__);
+fullStackPHPClassSession("remover e deletar", __LINE__);
 
-echo "<pre>";
-var_dump(myTeam("Kaue", "Gustavo", "Gah", "João"));
-echo "</pre>";
+//rmdir(__DIR__."/remove");
+$dirRemove = __DIR__ . "/remove";
+$dirFiles = array_diff(scandir($dirRemove), ['.', '..']);
+$dirCount = count($dirFiles);
+
+var_dump($dirFiles, $dirCount);
+
+if ($dirCount >= 1) {
+    echo "<h2>Clear...</h2>";
+    foreach (scandir($dirRemove) as $fileItem) {
+        $fileItem = __DIR__ . "/remove/{$fileItem}";
+        if (file_exists($fileItem) && is_file($fileItem)) {
+            unlink($fileItem);
+        }
+    }
+} else {
+    rmdir($dirRemove);
+}
