@@ -8,6 +8,7 @@ fullStackPHPClassName("03.10 - Upload de arquivos");
  */
 fullStackPHPClassSession("upload", __LINE__);
 
+echo '<pre>';
 $folder = __DIR__ . "/uploads";
 
 if (!file_exists($folder) || !is_dir($folder)) {
@@ -62,20 +63,4 @@ if ($_FILES && !empty($_FILES['file']['name'])) {
 
 include __DIR__ . "/form.php";
 var_dump(scandir(__DIR__ . "/uploads"));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+echo '</pre>';
