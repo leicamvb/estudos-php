@@ -1,108 +1,81 @@
 <?php
 require __DIR__ . '/fullstackphp/fsphp.php';
-fullStackPHPClassName("03.09 - Formulários e filtros");
+fullStackPHPClassName("03.10 - Upload de arquivos");
 
 /*
- * [ request ] $_REQUEST
- * https://php.net/manual/pt_BR/book.filter.php
+ * [ upload ] sizes | move uploaded | url validation
+ * [ upload errors ] http://php.net/manual/pt_BR/features.file-upload.errors.php
  */
-fullStackPHPClassSession("request", __LINE__);
-echo '<pre>';
-$form = new StdClass();
-$form->name = "Um nome";
-$form->mail = "um@email.com";
+fullStackPHPClassSession("upload", __LINE__);
 
-var_dump($_REQUEST); 
+$folder = __DIR__ . "/uploads";
 
-$form->method = "get";
-$form->method = "post";
-
-include __DIR__ . "/form.php";
-
-
-/*
- * [ post ] $_POST | INPUT_POST | filter_input | filter_var
- */
-fullStackPHPClassSession("post", __LINE__);
-
-
-var_dump($_POST);
-
-
-$post = filter_input(INPUT_POST, "name", FILTER_DEFAULT);
-$postArray = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+if (!file_exists($folder) || !is_dir($folder)) {
+    mkdir($folder, 0755);
+}
 
 var_dump([
-    $post,
-    $postArray
+    "filesize" => ini_get("upload_max_filesize"),
+    "postsize" => ini_get("post_max_size")
 ]);
 
-if ($postArray) {
-    if (in_array("", $postArray)) {
-        echo "<p class='trigger warning'>Preencha todos os campos!</p>";
-    } elseif (!filter_var($postArray['mail'], FILTER_VALIDATE_EMAIL)) {
-        echo "<p class='trigger warning'>E-mail informado não é válido!</p>";
+
+var_dump([
+    filetype(__DIR__ . "/index.php"),
+    mime_content_type(__DIR__ . "/index.php")
+]);
+
+
+$getPost = filter_input(INPUT_GET, "post", FILTER_VALIDATE_BOOLEAN);
+
+if ($_FILES && !empty($_FILES['file']['name'])) {
+    $fileUpload = $_FILES["file"];
+    var_dump($fileUpload);
+
+    $allowedTypes = [
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "application/pdf"
+    ];
+
+    $newFilename = time() . mb_strstr($fileUpload['name'], ".");
+
+    if (in_array($fileUpload['type'], $allowedTypes)) {
+        if (move_uploaded_file($fileUpload['tmp_name'], __DIR__ . "/uploads/{$newFilename}")) {
+            echo "<p class='trigger accept'>Arquivo enviado com sucesso!</p>";
+        } else {
+            echo "<p class='trigger error'>Erro inesperado!</p>";
+        }
     } else {
-        $saveStrip = array_map("strip_tags", $postArray);
-        $save = array_map("trim", $saveStrip);
-        var_dump($save);
-        echo "<p class='trigger accept'>Cadastro com sucesso!</p>";
+        echo "<p class='trigger error'>Tipo de arquivo não permitido!</p>";
+    }
+
+} elseif ($getPost) {
+    echo "<p class='trigger warning'>Whoops, parece que o arquivo é muito grande!</p>";
+} else {
+    if ($_FILES) {
+        echo "<p class='trigger warning'>Selecione um arquivo antes de enviar!</p>";
     }
 }
 
 
-$form->method = "post";
 include __DIR__ . "/form.php";
-
-/*
- * [ get ] $_GET | INPUT_GET | filter_input | filter_var
- */
-fullStackPHPClassSession("get", __LINE__);
+var_dump(scandir(__DIR__ . "/uploads"));
 
 
-var_dump($_GET);
-$get = filter_input(INPUT_GET, "mail", FILTER_DEFAULT);
-$getArray = filter_input_array(INPUT_GET, FILTER_DEFAULT);
-
-var_dump($getArray);
-
-$form->method = "get";
-include __DIR__ . "/form.php";
 
 
-/*
- * [ filters ] list | id | var[_array] | input[_array]
- * http://php.net/manual/pt_BR/filter.constants.php
- */
-fullStackPHPClassSession("filters", __LINE__);
 
 
-var_dump(
-    filter_list(),
-    [
-        filter_id("validate_email"),
-        FILTER_VALIDATE_EMAIL,
-        filter_id("string"),
-        FILTER_SANITIZE_STRING
-    ]
-);
 
 
-$filterForm = [
-    "name" => FILTER_SANITIZE_STRIPPED,
-    "mail" => FILTER_VALIDATE_EMAIL
-];
 
-$getForm = filter_input_array(INPUT_GET, $filterForm);
-var_dump($getForm);
 
-$email = "cursos@upinside.com.br";
 
-var_dump(
-    [
-        filter_var($email, FILTER_VALIDATE_EMAIL)
-    ],
-    filter_var_array($getForm, $filterForm)
-);
 
-echo '</pre>';
+
+
+
+
+
