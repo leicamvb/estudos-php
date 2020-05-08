@@ -2,9 +2,16 @@
 require __DIR__ . '/fullstackphp/fsphp.php';
 fullStackPHPClassName("03.10 - Upload de arquivos");
 
+<<<<<<< HEAD
 /*
  * [ upload ] sizes | move uploaded | url validation
  * [ upload errors ] http://php.net/manual/pt_BR/features.file-upload.errors.php
+=======
+$adicionado2 = "Aqui novas alterações do git2";
+$adicionado3 = "Aqui novas alterações do git3";
+/**
+ * [ echo ] https://php.net/manual/pt_BR/function.echo.php
+>>>>>>> 32d7d436d854946e0073b2540c2c30c06c505e3a
  */
 fullStackPHPClassSession("upload", __LINE__);
 
