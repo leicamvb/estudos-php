@@ -2,12 +2,15 @@
 require __DIR__ . '/fullstackphp/fsphp.php';
 fullStackPHPClassName("02.03 - Comandos de saída");
 echo "<pre>";
-
+fullStackPHPClassSession("Super Classes e Classes Filhas", __LINE__);
 require_once __DIR__ . '/vendor/autoload.php';
 
 $address= new \Sources\Inheritance\Address\Address("Rua XPT",01);
 
 $event = new \Sources\Inheritance\Event\EventLive('Estudos PHP',Date('d/m/Y h:i'),'1000',4,$address);
+
+$eventOnline = new \Sources\Inheritance\Event\EventOnline('Work Shop',Date('d/m/Y h:i'),'1000',"http://meusiteonline.com");
+
 
 var_dump($event);
 $event->register('Estudante 1', 'estudante1@email.com');
@@ -17,6 +20,8 @@ $event->register('Estudante 4', 'estudante4@email.com');
 $event->register('Estudante 5', 'estudante5@email.com');
 $event->register('Estudante 6', 'estudante6@email.com');
 
+
+fullStackPHPClassSession("Poliformismo", __LINE__);
 echo "</pre>";
 //fullStackPHPClassSession("tudo maiúsculo", __LINE__);
 //var_dump(strtoupper("vidraça"));

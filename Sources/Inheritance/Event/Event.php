@@ -5,7 +5,7 @@ class Event{
     private $event;
     private $date;
     private $price;
-    private $vacancies;
+    protected $vacancies;
     private $register;
 
     //\DateTime
@@ -16,7 +16,7 @@ class Event{
         $this->vacancies = $vacancies;
     }
 
-    public function register($fullName,$email){
+    public function register($fullName, $email){
         if ($this->vacancies >= 1){
             $this->vacancies -= 1;
             echo "<p class='trigger accept'> Parabéns! {$fullName}</p>";
@@ -25,7 +25,7 @@ class Event{
         }
     }
 
-    public function setRegister($fullName,$email){
+    protected function setRegister($fullName, $email){
         $this->register=[
             "name" => $fullName,
             "email" => $email,
